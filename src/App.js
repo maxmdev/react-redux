@@ -16,7 +16,7 @@ function App() {
           <div className='row'>
               <div className='col'>
                   <h4 className='m-4'>Sync. Posts</h4>
-                  <Posts posts={[1,2,3]} />
+                  <Posts posts={[]} />
               </div>
               <div className='col'>
                   <h4 className='m-4'>Fetched Posts</h4>
