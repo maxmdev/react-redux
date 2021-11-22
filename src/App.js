@@ -16,11 +16,11 @@ function App() {
           <div className='row'>
               <div className='col'>
                   <h4 className='m-4'>Sync. Posts</h4>
-                  <Posts posts={[]} />
+                  <Posts />
               </div>
               <div className='col'>
                   <h4 className='m-4'>Fetched Posts</h4>
-                  <FetchedPosts posts={[]} />
+                  <FetchedPosts />
               </div>
           </div>
       </div>
