@@ -1,4 +1,4 @@
-import {HIDE_LOADER, SHOW_LOADER} from "./types";
+import {CHANGE_THEME, HIDE_LOADER, SHOW_LOADER} from "./types";
 
 const initialState = {
     loading: false
@@ -10,6 +10,8 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, loading: true}
         case HIDE_LOADER:
             return { ...state, loading: false}
+        case CHANGE_THEME:
+            return { ...state, changeTheme: !state.changeTheme}
         default: return state
     }
 }

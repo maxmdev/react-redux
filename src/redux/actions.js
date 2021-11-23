@@ -1,4 +1,4 @@
-import {CREATE_POST, FETCH_POSTS, HIDE_LOADER, SHOW_LOADER} from "./types";
+import {CHANGE_THEME, CREATE_POST, FETCH_POSTS, HIDE_LOADER, SHOW_LOADER} from "./types";
 
 export function createPost(post) {
     return {
@@ -26,5 +26,11 @@ export function fetchPosts() {
         const jsonData = await response.json()
         dispatch(hideLoader())
         dispatch({ type: FETCH_POSTS, payload: jsonData })
+    }
+}
+
+export function changeTheme() {
+    return {
+        type: CHANGE_THEME
     }
 }
