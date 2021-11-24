@@ -1,5 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
+import debounce from "lodash.debounce";
+
 import {fetchSuggestions, hideSuggestions} from "../redux/actions";
 
 export const Autocomplete = () => {

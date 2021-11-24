@@ -1,8 +1,9 @@
-import {CHANGE_THEME, HIDE_LOADER, SHOW_LOADER} from "./types";
+import {CHANGE_THEME, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER} from "./types";
 
 const initialState = {
     loading: false,
-    changeTheme: false
+    changeTheme: false,
+    alert: null
 }
 
 export const appReducer = (state = initialState, action) => {
@@ -13,6 +14,10 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, loading: false}
         case CHANGE_THEME:
             return { ...state, changeTheme: !state.changeTheme}
+        case SHOW_ALERT:
+            return { ...state, alert: action.payload}
+        case HIDE_ALERT:
+            return { ...state, alert: null}
         default: return state
     }
 }

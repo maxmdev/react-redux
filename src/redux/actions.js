@@ -1,9 +1,9 @@
 import {
     CHANGE_THEME,
     CREATE_POST,
-    FETCH_POSTS, FETCH_SUGGESTIONS,
+    FETCH_POSTS, FETCH_SUGGESTIONS, HIDE_ALERT,
     HIDE_LOADER,
-    HIDE_SUGGESTIONS,
+    HIDE_SUGGESTIONS, SHOW_ALERT,
     SHOW_LOADER,
     SHOW_SUGGESTIONS
 } from "./types";
@@ -68,5 +68,20 @@ export function hideSuggestions() {
     return {
         type: HIDE_SUGGESTIONS,
         payload: []
+    }
+}
+
+export function showAlert(alertMessage) {
+    return dispatch => {
+        dispatch({type: SHOW_ALERT, payload: alertMessage});
+        setTimeout(() => {
+            dispatch({type: HIDE_ALERT});
+        }, 2000)
+    }
+}
+
+export function hideAlert() {
+    return {
+        type: HIDE_ALERT
     }
 }
