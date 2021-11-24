@@ -5,3 +5,5 @@ Has the following features:
 2. fetch posts from API;
 3. change background color;
 4. autocomplete input fields.
+
+![Main View](./public/Main.png)
