@@ -1,7 +1,8 @@
 import {CHANGE_THEME, HIDE_LOADER, SHOW_LOADER} from "./types";
 
 const initialState = {
-    loading: false
+    loading: false,
+    changeTheme: false
 }
 
 export const appReducer = (state = initialState, action) => {

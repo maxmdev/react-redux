@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {createPost} from "../redux/actions";
-import Post from "./Post";
 
 class PostForm extends React.Component {
     constructor(props) {
@@ -32,8 +31,8 @@ class PostForm extends React.Component {
 
         this.setState(prev => (
             {...prev, ...{
-                [event.target.name]: event.target.value
-            }}
+                    [event.target.name]: event.target.value
+                }}
         ))
     }
 

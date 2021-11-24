@@ -4,6 +4,7 @@ import Posts from "./components/Posts";
 import FetchedPosts from "./components/FetchedPosts";
 import {Theme} from "./components/Theme";
 import {useSelector} from "react-redux";
+import {Autocomplete} from "./components/Autocomplete";
 
 function App() {
     const isChangeTheme = useSelector(state => state.app.changeTheme);
@@ -32,6 +33,12 @@ function App() {
               <div className='row'>
                   <div className='col text-center'>
                       <Theme />
+                  </div>
+              </div>
+
+              <div className='row'>
+                  <div className='col text-center'>
+                      <Autocomplete />
                   </div>
               </div>
           </div>

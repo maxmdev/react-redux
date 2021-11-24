@@ -1,4 +1,12 @@
-import {CHANGE_THEME, CREATE_POST, FETCH_POSTS, HIDE_LOADER, SHOW_LOADER} from "./types";
+import {
+    CHANGE_THEME,
+    CREATE_POST,
+    FETCH_POSTS, FETCH_SUGGESTIONS,
+    HIDE_LOADER,
+    HIDE_SUGGESTIONS,
+    SHOW_LOADER,
+    SHOW_SUGGESTIONS
+} from "./types";
 
 export function createPost(post) {
     return {
@@ -32,5 +40,33 @@ export function fetchPosts() {
 export function changeTheme() {
     return {
         type: CHANGE_THEME
+    }
+}
+
+export function fetchSuggestions(input) {
+    return async dispatch => {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+        const jsonData = await response.json();
+        const suggestions = jsonData.filter(item => {
+            return item.title.includes(input);
+        });
+
+        if (suggestions.length > 0) {
+            dispatch({type: FETCH_SUGGESTIONS, payload: suggestions});
+            dispatch({type: SHOW_SUGGESTIONS})
+        }
+    }
+}
+
+export function showSuggestions() {
+    return {
+        type: SHOW_SUGGESTIONS
+    }
+}
+
+export function hideSuggestions() {
+    return {
+        type: HIDE_SUGGESTIONS,
+        payload: []
     }
 }

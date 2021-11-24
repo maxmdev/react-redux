@@ -6,8 +6,9 @@ export const Theme = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className='m-4'>
-            <button className='btn btn-warning' onClick={() => dispatch(changeTheme())}>Change Theme</button>
+        <div className='m-4 border border-1 p-4'>
+            <button className='btn btn-warning'
+                    onClick={() => dispatch(changeTheme())}>Change Theme</button>
         </div>
     )
 }
