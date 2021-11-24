@@ -53,6 +53,7 @@ class PostForm extends React.Component {
                     />
                     <button className='btn btn-success mt-2' type='submit'>Add post</button>
                 </form>
+                <p className='fw-lighter'>Forbidden words: Angular, php, vue...</p>
             </div>
         )
     }
