@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
+import React, {useState} from "react";
 import {fetchSuggestions, hideSuggestions} from "../redux/actions";
 
 export const Autocomplete = () => {
@@ -42,11 +42,11 @@ export const Autocomplete = () => {
             <datalist id='datalistOptions'>
                 {
                     showSuggestions && (
-                        suggestionsList.map(suggestion => <option value={suggestion.title}
-                                                                  key={suggestion.id}/>)
+                        suggestionsList.map(suggestion => <option value={suggestion.title} key={suggestion.id}/>)
                     )
                 }
             </datalist>
+            <p className='fw-lighter'>Type: qui, sunt...</p>
         </div>
     )
 }
