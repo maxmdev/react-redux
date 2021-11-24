@@ -76,7 +76,7 @@ export function showAlert(alertMessage) {
         dispatch({type: SHOW_ALERT, payload: alertMessage});
         setTimeout(() => {
             dispatch(hideAlert());
-        }, 2000)
+        }, 5000)
     }
 }
 
