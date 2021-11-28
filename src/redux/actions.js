@@ -53,7 +53,6 @@ export function fetchSuggestions(input) {
 
         if (suggestions.length > 0) {
             dispatch({type: FETCH_SUGGESTIONS, payload: suggestions});
-            dispatch({type: SHOW_SUGGESTIONS})
         }
     }
 }
@@ -66,8 +65,7 @@ export function showSuggestions() {
 
 export function hideSuggestions() {
     return {
-        type: HIDE_SUGGESTIONS,
-        payload: []
+        type: HIDE_SUGGESTIONS
     }
 }
 

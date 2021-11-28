@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import debounce from "lodash.debounce";
-import {fetchSuggestions, hideSuggestions} from "../redux/actions";
+import {fetchSuggestions, hideSuggestions, showSuggestions} from "../redux/actions";
 
 class Autocomplete extends React.Component {
     constructor(props) {
@@ -12,8 +12,9 @@ class Autocomplete extends React.Component {
         };
     }
 
-    _fetchSuggestions = debounce(event => {(this.props.fetchSuggestions(this.state[event.target.name]));
-    }, 350);
+    _fetchSuggestions = debounce((event) => {
+        this.props.fetchSuggestions(this.state[event.target.name])
+    }, 400);
 
     changeInput = event => {
         event.persist();
@@ -25,6 +26,7 @@ class Autocomplete extends React.Component {
         ), () => {
             if(this.state[event.target.name].length >= 2) {
                 this._fetchSuggestions(event);
+                this.props.showSuggestions();
             } else {
                 this.props.hideSuggestions();
             }
@@ -44,7 +46,7 @@ class Autocomplete extends React.Component {
                        placeholder='Type to search...'/>
                 <datalist id='datalistOptions'>
                     {
-                        this.props.showSuggestions && (
+                        this.props.displaySuggestions && (
                             this.props.suggestions.map(suggestion =>
                                 <option value={suggestion.title} key={suggestion.id}/>)
                         )
@@ -57,11 +59,13 @@ class Autocomplete extends React.Component {
 }
 
 const mapDispatchToProps = {
-    fetchSuggestions, hideSuggestions
+    fetchSuggestions,
+    hideSuggestions,
+    showSuggestions
 };
 
 const mapStateToProps = state => ({
-    showSuggestions: state.autocomplete.showSuggestions,
+    displaySuggestions: state.autocomplete.displaySuggestions,
     suggestions: state.autocomplete.suggestions
 });
 
