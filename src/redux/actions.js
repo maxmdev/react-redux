@@ -3,7 +3,7 @@ import {
     CREATE_POST,
     FETCH_POSTS, FETCH_SUGGESTIONS, HIDE_ALERT,
     HIDE_LOADER,
-    HIDE_SUGGESTIONS, SHOW_ALERT,
+    HIDE_SUGGESTIONS, RESET_AUTOCOMPLETE, SELECT_SUGGESTION, SHOW_ALERT,
     SHOW_LOADER,
     SHOW_SUGGESTIONS
 } from "./types";
@@ -66,6 +66,18 @@ export function showSuggestions() {
 export function hideSuggestions() {
     return {
         type: HIDE_SUGGESTIONS
+    }
+}
+
+export function selectSuggestion() {
+    return {
+        type: SELECT_SUGGESTION
+    }
+}
+
+export function resetAutocomplete() {
+    return {
+        type: RESET_AUTOCOMPLETE
     }
 }
 

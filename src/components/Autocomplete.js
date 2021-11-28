@@ -1,7 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import debounce from "lodash.debounce";
-import {fetchSuggestions, hideSuggestions, showSuggestions} from "../redux/actions";
+import {
+    fetchSuggestions,
+    hideSuggestions,
+    resetAutocomplete,
+    selectSuggestion,
+    showSuggestions
+} from "../redux/actions";
+import {ClearButton} from "./ClearButton/ClearButton";
 
 class Autocomplete extends React.Component {
     constructor(props) {
@@ -24,7 +31,7 @@ class Autocomplete extends React.Component {
                     [event.target.name]: event.target.value
                 }}
         ), () => {
-            if(this.state[event.target.name].length >= 2) {
+            if(this.state[event.target.name].length >= 2 && !this.props.isSuggestionSelected) {
                 this._fetchSuggestions(event);
                 this.props.showSuggestions();
             } else {
@@ -33,25 +40,56 @@ class Autocomplete extends React.Component {
         });
     }
 
+    selectSuggestion = event => {
+        event.persist();
+
+        this.setState(prev => (
+            { ...prev, ...{
+                [event.target.getAttribute('data-for')]: event.target.innerText
+            }}
+        ));
+
+        this.props.selectSuggestion();
+    }
+
+    resetInput = (eventFor) => {
+        this.props.resetAutocomplete();
+        this.setState(prev => (
+            { ...prev, ...{
+                [eventFor]: ''
+            }}
+        ))
+    }
+
     render() {
         return (
             <div className='m-4'>
                 <label htmlFor='exampleDataList' className='form-label'>Autocomplete Example</label>
-                <input className='form-control'
-                       list='datalistOptions'
-                       value={this.state.title}
-                       name='title'
-                       onChange={event => this.changeInput(event)}
-                       onBlur={() => this.props.hideSuggestions()}
-                       placeholder='Type to search...'/>
-                <datalist id='datalistOptions'>
+                <div className='input-group'>
+                    <input className='form-control'
+                           value={this.state.title}
+                           name='title'
+                           onChange={this.changeInput}
+                           disabled={this.props.isSuggestionSelected}
+                           placeholder='Type to search...'/>
+                    { this.props.isSuggestionSelected && (
+                        <ClearButton onReset={this.resetInput} eventFor='title'/>
+                    )}
+                </div>
+                <div className='list-group text-start'>
                     {
                         this.props.displaySuggestions && (
                             this.props.suggestions.map(suggestion =>
-                                <option value={suggestion.title} key={suggestion.id}/>)
+                                <button type='button' key={suggestion.id}
+                                        data-for='title'
+                                        onClick={this.selectSuggestion}
+                                        className='list-group-item list-group-item-action'>
+                                    {suggestion.title}
+                                </button>
+                            )
                         )
                     }
-                </datalist>
+                </div>
                 <p className='fw-lighter'>Type: qui, sunt...</p>
             </div>
         )
@@ -61,12 +99,15 @@ class Autocomplete extends React.Component {
 const mapDispatchToProps = {
     fetchSuggestions,
     hideSuggestions,
-    showSuggestions
+    showSuggestions,
+    selectSuggestion,
+    resetAutocomplete
 };
 
 const mapStateToProps = state => ({
     displaySuggestions: state.autocomplete.displaySuggestions,
-    suggestions: state.autocomplete.suggestions
+    suggestions: state.autocomplete.suggestions,
+    isSuggestionSelected: state.autocomplete.isSelected
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Autocomplete);
